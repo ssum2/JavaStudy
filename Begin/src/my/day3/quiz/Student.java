@@ -38,7 +38,7 @@ public class Student {
 	}
 	
 	public String showAvg() {
-		String avg1 = ">> 평균: "+((kor+eng+math)/3.0);
+		String avg1 = ">> 평균: "+((double)(kor+eng+math)/3);
 		return avg1;
 		
 	}
