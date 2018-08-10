@@ -7,8 +7,8 @@ public class OperatorTest {
 		System.out.println("1. 산술연산자: + - * / % << >> >>>");
 		
 //		+ - */ %(나머지)
-//		*	x << n x*(2^n)의 결과값과 같다. => 이때, x는 실수형은 불가능하고 정수형만 가능
-//		*	x >> n x/(2^n)의 결과값과 같다. => 이때, x는 실수형은 불가능하고 정수형만 가능
+//		*	x << n x*(2의n승)의 결과값과 같다. => 이때, x는 실수형은 불가능하고 정수형만 가능
+//		*	x >> n x/(2의n승)의 결과값과 같다. => 이때, x는 실수형은 불가능하고 정수형만 가능
 //		x >>> n 정수x를 32bit형태의 2진수로 나타낸 후 오른쪽으로 n번 이동시키고 빈 자리는 0으로 채움
 		
 		int n = 10;
@@ -24,8 +24,8 @@ public class OperatorTest {
 //		n/3=3
 //		n%3=1
 		
-		System.out.println("n<<3="+(n<<3)); // 10*(2^3 = 8) = 80
-		System.out.println("n>>3="+(n>>3)); // 10/(2^3 = 8) = 80
+		System.out.println("n<<3="+(n<<3)); // 10*(2의3승 = 8) = 80
+		System.out.println("n>>3="+(n>>3)); // 10/(2의3승 = 8) = 80
 		System.out.println("n>>>3="+(n>>>3)); 
 		// 1) 10을 32bit(8byte) 2진수로 표현 
         // 00000000 00000000 00000000 00001010 (8 4 2 1) 
@@ -236,7 +236,72 @@ public class OperatorTest {
 		for(i=0; i<5; i++) {
 			System.out.println("i = " + i);
 		}
+		
+		
+		System.out.println("\n8. 비교연산자: == != > < >= <= ");
+		
+		System.out.println("\n9. 할당 연산자; 연산 후 대입연산자: += -= *= /= %= 등... ");
+		int no = 1;
+		no+=3; // 연산 후에 대입해주기 -> no+3을한 값을 no에 대입!
+		System.out.println("no => "+no);
+		
+		no=10;
+		no-=3;
+		System.out.println("no => "+no); // no-3한 값을 no에 대입 => 10-3 = 7 = no
+		
+		no*=3;
+		System.out.println("no => "+no); // 7*3 = 21 = no
+		
+		no%=2;
+		System.out.println("no => "+no); // 21%2 = 1 = no
+		
+		no^=5;
+		System.out.println("no => "+no); // 1^5 = 4 = no = 0000100
+		// 0000001 XOR 00000101 => 00000100
 		 
+		
+		no<<=3;
+		System.out.println("no => "+no); // 4*2의3승 =32
+		
+		
+		System.out.println("\n10. 삼항 연산자; if ~ else와 같음: 데이터타입 변수명 = (조건식)? 값1:값2 ");
+		/*
+		 * 변수를 선언한 다음 초기화를 할 때, 조건에 따라 달라지게 함
+		 * 변수선언 = (조건식)? 값1:값2; 
+		 * => 이 조건식이 참이라면 ? 다음에 나오는 값1이 변수에 대입, 
+		 * => 이 조건식이 거짓이라면 ? 다음 값2가 변수에 대입
+		 * 
+		 */
+		
+		int no1 =50, no2=60;
+		int result = (no1 > no2)? no1:no2; // no1>no2가 참이면 no1, 거짓이면 no2 ==> 변수초기화 내용을 넣는데에 조건을 걸어둠
+		System.out.println("result => "+result);
+		
+		
+		
+		// >>>>>>>>> 연산자의 우선순위 <<<<<<<<<<<
+		/*
+		 * 높음	단항연산자 : +(양수), -(음수), ~(tild), (), ++, --
+		 * 		산술연산자 : *, /, %, +(덧셈), -(뺄셈), >>, <<, >>>
+		 * 		비교연산자 : <, >, >=, <=, ==, !=
+		 * 		논리연산자 : &, |, ^, &&, ||
+		 * 		삼항연산자 : ?:
+		 * 낮음	대입연산자 : =, +=, -=, *=, /=, %=, >>=, <<=, >>>=
+		 */
+		
+		int num = 10;
+		String str = (num>>>3 >=2) && (1>0)? "참입니다.":"거짓입니다.";
+		//				1번	  2번     3번 ------------------->4번
+		// 1 >=2 (F) && (T, skip) ==> 거짓입니다.
+		// 
+		
+		System.out.println("str => " + str);
+		
+		
+		
+		
+		
+		
 	} // end of main()
 
 } // end of OperatorTest class
