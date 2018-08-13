@@ -354,19 +354,6 @@ public class MultiForHomework {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	} // end of main()
 
 } // end of class
