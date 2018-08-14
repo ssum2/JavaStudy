@@ -19,4 +19,15 @@ public class MyUtil {
 //		return sum;
 		return a+b+c;
 	}
-}
+	
+	// 랜덤 정수 나타내기: 내가 한 것
+//	public static int random(int startNo, int endNo) {
+//		int ran = (int)(Math.random()*(endNo-startNo)+1);
+//		return ran;
+//	}
+	// 랜덤 정수 나타내기: 강사님이 한 것
+	public static int random(int a, int b) {
+		return (int)((Math.random()*(b-a+1))+a);
+	}
+	
+} // end of class

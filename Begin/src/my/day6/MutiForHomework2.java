@@ -12,12 +12,8 @@ public class MutiForHomework2 {
 	 		*****		
 	 		 ***		
 	 	   	  *		
-	 	   	 
-	 	   			
-	 				 		
+	 			 		
 		 */
-		
-		// 다시해보기 젠장할 망할 if(i==3) continue; 써서 끝내라는데 시벌 어떡하라고
 		
 		for(int i=1; i<=3; i++) {
 			if(i==3) continue;
