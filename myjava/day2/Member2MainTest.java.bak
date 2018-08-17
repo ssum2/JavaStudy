@@ -1,0 +1,8 @@
+public class Member2MainTest 
+{
+	public static void main(String[] args) 
+	{
+		Member2 me = new Member2();
+		me.showInfo();
+	}
+}
