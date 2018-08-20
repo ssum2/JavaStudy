@@ -35,6 +35,7 @@ public class JobMain {
 		String userid = "";
 		boolean boolUserid = false;
 		
+		outer:
 		do {
 			System.out.print("▷아이디 => ");
 			userid = sc.nextLine();
@@ -43,8 +44,17 @@ public class JobMain {
 			if(boolUserid) { // userid를 trim했을 때 비어있는가?
 				System.out.println(">>> 아이디는 공백만으로 사용 불가합니다. 다시 입력하세요");
 			}
-			else
-				break;
+			else 
+			
+				for(int i=0; i<Gujikja.count; i++) {
+					if(userid.equals(gujikjaArr[i].userid)) {
+						System.out.println(">> 중복된 아이디는 사용할 수 없습니다 <<");
+						continue outer;
+					}
+					else
+						break outer;
+				}
+			break;
 		
 		} while (boolUserid); // end of while(userid)
 		
