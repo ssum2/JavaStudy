@@ -1,5 +1,6 @@
 package my.util;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
@@ -60,6 +61,73 @@ public class MyUtil {
 		}
 	}
 	
+	public static String currentTime2() {
+		
+		Calendar currentdate = Calendar.getInstance();
+		
+		int year = currentdate.get(Calendar.YEAR);
+		
+		int month = currentdate.get(Calendar.MONTH)+1;
+		String strMonth = month<10?"0"+month:String.valueOf(month);
+		
+		int day = currentdate.get(Calendar.DATE);
+		String strDay = day<10?"0"+day:String.valueOf(day);
+		
+		String today = year+"-"+strMonth+"-"+strDay;
+        today += " " + currentdate.get(Calendar.HOUR_OF_DAY) +":"+ ( currentdate.get(Calendar.MINUTE)<10?"0"+currentdate.get(Calendar.MINUTE):currentdate.get(Calendar.MINUTE) ) +":"+ ( currentdate.get(Calendar.SECOND)<10?"0"+currentdate.get(Calendar.SECOND):currentdate.get(Calendar.SECOND) );         
+        
+        switch (currentdate.get(Calendar.DAY_OF_WEEK)) {
+			case 1:
+				today += " 일요일";
+				break;
+			case 2:
+				today += " 월요일";
+				break;	
+			case 3:
+				today += " 화요일";
+				break;
+			case 4:
+				today += " 수요일";
+				break;
+			case 5:
+				today += " 목요일";
+				break;
+			case 6:
+				today += " 금요일";
+				break;	
+			case 7:
+				today += " 토요일";
+				break;
+		}
+        
+        return today;
+	}
+	
+	
+	public static boolean checkNumber(String str) {
+		
+		// str ==> "12347049" 
+		// str ==> "12a4t049"
+		
+		boolean boolFlag = false;
+		
+		char[] chArr = str.toCharArray();
+		
+		for(int i=0; i<chArr.length; i++) {
+			if( !('0'<=chArr[i] && chArr[i]<='9') ) {
+				boolFlag = true;
+				break;
+			}
+		}// end of for-----------------
+		
+		if(!boolFlag)
+			return true;
+		else
+			return false;
+	}
+	
 	
 	
 }
+
+

@@ -11,11 +11,35 @@ public class StudentMain {
 		Scanner sc = new Scanner(System.in);
 		
 		Student[] studentArr = new Student[3];
+		/* -------------------
+		   |  0  |  1  | null |
+		   -------------------
+		*/
 		
 		do {
 			if(Student.count < studentArr.length) {
-				System.out.print(">> 학번 : ");
-				String hakbun =	sc.nextLine();
+				
+				String hakbun = "";
+				
+				boolean isDuplicateHakbun;
+				
+				do {
+					System.out.print(">> 학번 : ");
+					hakbun = sc.nextLine();
+					
+					isDuplicateHakbun = false;
+					
+					////////// 학번중복검사하기  /////////
+					for(int i=0; i<Student.count; i++) {
+						if(hakbun.equals(studentArr[i].hakbun)) {
+							System.out.println(">> 기존에 사용하는 학번이므로 새로운 학번을 입력하세요!!");
+							isDuplicateHakbun = true; // 학번이 중복된 경우
+							break;
+						}
+					} // end of for-------------------
+					/////////////////////////////////
+				
+				} while (isDuplicateHakbun);
 				
 				System.out.print(">> 암호 : ");
 				String passwd =	sc.nextLine();
@@ -66,10 +90,29 @@ public class StudentMain {
 		
 		System.out.println(">>> 입력한 학생 정보 보기2 <<<");
 		
-		for(Student st : studentArr ) {
+		for(Student st : studentArr) {
 			st.showStudentInfo();
 		}
-
+		
+		System.out.println("\n\n");
+		
+		System.out.print(">> 검색하실 학번 => ");
+		String searchHakbun = sc.nextLine(); 
+		
+		boolean isSearchHakbun = false;
+		
+		for(Student st : studentArr) {
+			if(st.hakbun.equals(searchHakbun)) {
+				st.showStudentInfo();
+				isSearchHakbun = true;
+				break;
+			}
+		}// end of for--------------------
+		
+		if(!isSearchHakbun) {
+			System.out.println(">> 검색하시려는 학번 " + searchHakbun + "는 존재하지 않습니다.!!");    
+		}
+				
 		sc.close();
 	}// end of main---------------------------------
 
