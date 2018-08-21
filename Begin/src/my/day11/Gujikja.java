@@ -3,6 +3,7 @@ package my.day11;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.Scanner;
 
 // 구인구직 프로그램 구성하기(1) 구직자 클래스
 
@@ -46,9 +47,7 @@ public class Gujikja {
 
 	
 	// 2. 기본생성자, 파라미터가 있는 생성자 만들기
-	public Gujikja( ) {
-		
-	}
+	public Gujikja( ) {}
 	
 	public Gujikja(String userid, String passwd, String name, String birthday, int gender, String address, int school,
 			String mobile, String hopejob, int hopemoney) {
@@ -66,7 +65,6 @@ public class Gujikja {
 		count++;
 	}
 	
-	
 	// 3. 기능 만들기(메소드) --------------------------------------------
 	// 3-1. 구직자가 로그인 할 수 있는 기능 --> boolean형으로 리턴
 	public boolean login(String userid, String passwd) {
@@ -77,8 +75,26 @@ public class Gujikja {
 			return false;
 	}
 	
+	// 180821_09:20AM 강사님이 해주신 부분 ---------------------
+	// 3-1. 구직자가 로그인 할 수 있는 기능
 	
+		public Gujikja login2(String userid, String passwd) {
+			// 객체타입으로 반환
+			if(this.userid.equals(userid) &&
+			// 그 객체의 아이디와 (this.userid) 내가 입력한 아이디(userid)가 같은가?
+				this.passwd.equals(passwd)) {
+			// 그 객체의 암호와 (this.passwd) 내가 입력한 암호(userpasswd)가 같은가?
+//				System.out.println(">> 로그인 성공 <<");
+				return this; // 그 객체를 반환
+			}
+			else {
+//				System.out.println(">> 로그인 실패 <<");
+				return null;
+			}
+		
+		} // end of login() -------------------------------
 	
+
 	// 3-2. 구직자의 현재 나이 조회 기능
 	public String getAge() {
 		Calendar currentdate = Calendar.getInstance(); // 현재날짜와 시간을 얻어온다.
@@ -102,8 +118,7 @@ public class Gujikja {
 			strGen="여";
 		
 		return strGen;
-	}
-	
+	}	
 	
 	// 3-3. b) 구직자 성별 조회 기능 (강사님이 한것; switch)
 	public String getGender1() {
@@ -120,9 +135,7 @@ public class Gujikja {
 		
 		}
 		return result;
-	}
-	
-	
+	}	
 	
 	// 3-4. 구직자의 최종학력 조회 기능
 	public String getSchool() {
@@ -150,15 +163,32 @@ public class Gujikja {
 		DecimalFormat df = new DecimalFormat("#,###");
 		return df.format(hopemoney)+"만원";
 	}
-//	
-//	// 3-5 cf) 모바일폰 넘버 포맷 변경
-//	public String getMobile() {
-//		DecimalFormat df = new DecimalFormat("###-####-####");
-//		return df.format(mobile);
-//	}
-//	
 	
-	
+	// 3-5 cf) 모바일폰 넘버 포맷 변경; 나 혼자 해본 것
+//		public String getMobile() {
+//			String phone1 = mobile.substring(0,3);
+//
+//			String phone2 ="";
+//			String phone3 ="";
+//			if(mobile.length()==11) {
+//				phone2=mobile.substring(3, 7);
+//				phone3=mobile.substring(7);
+//			}
+//			else if(mobile.length()==10) {
+//				phone2=mobile.substring(3, 6);
+//				phone3=mobile.substring(6);
+//			}
+//			return phone1+"-"+phone2+"-"+phone3;
+//		}
+		
+	// 3-5 cf) 모바일폰 넘버 포맷 변경; 강사님이 한 것
+		public String getMobile() {
+			// mobile의 길이가 10 일때
+			if(mobile.length()==10)
+				return mobile.substring(0,3)+"-"+mobile.substring(3,6)+"-"+mobile.substring(6);
+			else
+				return mobile.substring(0,3)+"-"+mobile.substring(3,7)+"-"+mobile.substring(7);
+		}
 	
 	// 3-6. 구직자 정보 조회 기능
 	public String getGujikjaInfo() {
@@ -170,15 +200,111 @@ public class Gujikja {
 					"05. 성	별: "+getGender()+"\n"+
 					"06. 주	소: "+address+"\n"+
 					"07. 최종학력: "+getSchool()+"\n"+
-					"08. 연 락 처: "+mobile+"\n"+
+					"08. 연 락 처: "+getMobile()+"\n"+
 					"09. 희망직종: "+hopejob+"\n"+
 					"10. 희망연봉: "+getHopemoney()+"\n";
 	
 		return info;
 	}
+
+//  getter setter
+	public String getPasswd() {
+		return passwd;
+	}
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
 	
-	// -------------------------------------------------------------끝
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
 	
+	public String setAge(String birthday) {
+		this.birthday = birthday;
+		Calendar currentdate = Calendar.getInstance(); // 현재날짜와 시간을 얻어온다.
+		
+		int currentYear = currentdate.get(Calendar.YEAR); // 현재 연도 얻어옴
+		
+		// 나이: 현재연도 - 출생연도 +1
+		int birthYear = Integer.parseInt(birthday.substring(0, 4)); // 지정된 인덱스값 이상 ~ 인덱스값 미만의 문자열 가져오기
+		// birthday의 경우 메인메소드에서 숫자만 넣을 수 있게끔 필터 걸 예정
+		
+		return String.valueOf(currentYear-birthYear+1);
+	}
+	
+	public String setGender1(String gender) {
+		String result = "";
+		this.gender = Integer.parseInt(gender);
+		switch (gender) {
+		case "1":
+			result = "남자";
+			break;
+
+		case "2":
+			result = "여자";
+			break;
+		}
+		return result;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+
+	public String setSchool(int school) {
+		String lastSch ="";
+		this.school = school;
+		switch(school) {
+		case 1:
+			lastSch="대졸 이상";
+			break;
+		case 2:
+			lastSch="초대졸";
+			break;
+		case 3:
+			lastSch="고졸";
+			break;
+		case 4:
+			lastSch="고졸 미만";
+			break;
+		}
+		return lastSch;
+	}
+	
+	public String setMobile(String mobile) {
+		this.mobile = mobile;
+		// mobile의 길이가 10 일때
+		if(mobile.length()==10)
+			return mobile.substring(0,3)+"-"+mobile.substring(3,6)+"-"+mobile.substring(6);
+		else
+			return mobile.substring(0,3)+"-"+mobile.substring(3,7)+"-"+mobile.substring(7);
+	}
+
+	public String getHopejob() {
+		return hopejob;
+	}
+	public void setHopejob(String hopejob) {
+		this.hopejob = hopejob;
+	}
+
+	public String setHopemoney(int hopemoney) {
+		this.hopemoney = hopemoney;
+		DecimalFormat df = new DecimalFormat("#,###");
+		return df.format(hopemoney)+"만원";
+	}
 	
 } // end of class

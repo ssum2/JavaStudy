@@ -328,12 +328,9 @@ public class JobMain {
 		
 			case "3":
 				jobapp.loginGujikja();
-				
-				
-				break;
 
+				break;
 			}
-			
 		} while (!"15".equals(menuNo));
 		
 		System.out.println("========= 프로그램 종료 =========");
