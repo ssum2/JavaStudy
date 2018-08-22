@@ -1,4 +1,4 @@
-package my.day11;
+package my.day12;
 
 import java.util.Scanner;
 
@@ -7,8 +7,36 @@ import my.util.MyUtil;
 // 180820 12:31PM
 // 180821_09:20AM 강사님이 하신 내용
 // 180821_15:00PM ~ Main2 이후 추가 수정본
+// 180822_09:00AM
 
-public class JobMain3 {
+/*
+	구직자 				회사
+	id					id
+	passwd				passwd
+	name				name
+	tel					tel
+	address				address
+	--------- △공통요소 ----------- >> 로그인 메소드도 동일함
+	
+	school*				seedmoney*
+	
+	EX---------------------------
+	*Common.class 생성
+	 - id / passwd / name / tel / address (구직자, 회사 모두 동일한 요소)
+	 - login(id, passwd)
+	 
+	*Gujikja.class
+	 - school / hopejob / hopemoney ... (구직자만 있는 요소)
+	
+	*Company.class
+	 - seedmoney / CEOname ...
+	 
+	 			    <Common.class>
+	 		extends	↗			   ↖ extends(상속)
+	 	Gujikja.class			 Company.class
+	 
+*/
+public class JobMain4 {
 
 	// 4. Gujikja 객체를 저장하는 배열
 	Gujikja[] gujikjaArr = new Gujikja[10];
@@ -425,7 +453,7 @@ public class JobMain3 {
 	} // end of deleteMeGujikja()
 
 	
-	// 관리자- 특정 회원 삭제 하기
+	// ※관리자- 특정 회원 삭제 하기(과제; 내가 한 버전)
 	public void deleteItGujikja(String userid) {
 		int deleteIndex = 0;
 		
@@ -437,8 +465,7 @@ public class JobMain3 {
 			else {
 				System.out.println(">> 입력하신 userid와 일치하는 회원을 찾을 수 없습니다 <<");
 				return;
-			}
-				
+			}	
 		}
 		if(deleteIndex == Gujikja.count-1) {
 			gujikjaArr[deleteIndex] =null;
@@ -454,17 +481,39 @@ public class JobMain3 {
 	}
 	
 	
+	// ※관리자 메뉴 3. 특정 구직자회원 삭제 메소드 (강사님이 한 버전) -> 위에 만들어둔 회원탈퇴 메소드 활용
+	public void deleteSomeGujikja(Scanner sc) {
+		System.out.print("▶ 삭제할 구직자 ID : ");
+		String userid = sc.nextLine();
+		
+		boolean isExists = false; // 아이디가 배열 속에 있냐 없냐를 따지는 표식
+		
+		// 먼저 입력한 구직자 아이디와 배열 속에 있는 값 중에 일치하는 값이 있는지 찾아야 함
+		for(int i=0; i<Gujikja.count; i++) {
+			if( gujikjaArr[i].userid.equals(userid)) {
+				isExists = true;
+				break;
+			} // end of if
+		} // end of for
+		if(isExists) {
+			deleteMeGujikja(userid); // 이 기능 자체가 회원을 삭제하고 배열 재배치 해주는 것...
+		}
+		else
+			System.out.println(">> 삭제하시려는 구직자 ID "+userid+"는 존재하지 않습니다. <<");
+	} // end of deleteSomeGujikja()
+	
+	
 	
 	public static void main(String[] args) { // 메인메소드 안은 간단하게 정리하고 웬만하면 위에서 메소드로 정리해서 씀
 		Scanner sc = new Scanner(System.in);
 		String startMenuNo = "";
 	
-		JobMain3 jobapp = new JobMain3(); // 객체 하나 생성
+		JobMain4 jobapp = new JobMain4(); // 객체 하나 생성
 		Gujikja loginGujikja = null; // login된 구직자, 객체생성X
 	
 		do {
 			// 초기메뉴 출력
-			JobMain3.startMenu();
+			JobMain4.startMenu();
 			startMenuNo = sc.nextLine();
 			
 			switch (startMenuNo) {
@@ -478,7 +527,7 @@ public class JobMain3 {
 				
 				if(loginGujikja != null) { // loginGujikja에 객체값이 들어왔을 때(!null, 로그인 성공)
 					do { // ◎구직자 메뉴 보여주기
-						JobMain3.gujikjaMenu(); // 로그아웃할 때 까지 계속 구직자메뉴가 나오고, 로그아웃하면 초기메뉴가 나와야 함
+						JobMain4.gujikjaMenu(); // 로그아웃할 때 까지 계속 구직자메뉴가 나오고, 로그아웃하면 초기메뉴가 나와야 함
 						String gujikjaMenuNo = sc.nextLine();
 						
 						boolean isBreak = false; // do~while을 나가기 위한 표식
@@ -545,7 +594,7 @@ public class JobMain3 {
 				String adminMenuNo ="";
 				if("admin".equals(adminId) && "qwer1234$".equals(adminPw)) { // 관리자 로그인 성공
 					while(!"5".equals(adminMenuNo)) {
-						JobMain2.adminMenu();
+						JobMain4.adminMenu();
 						adminMenuNo = sc.nextLine();
 						
 						switch (adminMenuNo) {
@@ -562,15 +611,14 @@ public class JobMain3 {
 								break;
 							
 							case "3": // 특정 구직자 삭제
-								/*
-								 	특정 구직자 삭제 기능 구현 **과제**
-								 	>> 
-								 */
-								System.out.print(">> 삭제할 아이디를 입력하세요: ");
-								String deletedId = sc.nextLine();
+//								1. 내가 해본 것
+//								System.out.print(">> 삭제할 아이디를 입력하세요: ");
+//								String deletedId = sc.nextLine();
+//								
+//								jobapp.deleteItGujikja(deletedId);
 								
-								jobapp.deleteItGujikja(deletedId);
-								
+//								2. 강사님이 하신 것
+								jobapp.deleteSomeGujikja(sc);
 								break;
 	
 							case "4": // 특정 구인회사 삭제
@@ -587,6 +635,9 @@ public class JobMain3 {
 						} // end of switch
 					}// end of while
 				}
+				else
+					System.out.println(">> 아이디와 비밀번호가 일치하지 않습니다 <<");
+				
 			}// end of case "5"
 								
 				break;

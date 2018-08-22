@@ -418,7 +418,7 @@ public class GujikjaController {
 							
 						case "2": // 2. 나의 정보 변경
 							System.out.println(">>> 변경하실 정보를 선택하세요: ");
-							System.out.println("1. 암호 \n2. 성명\n3. 나이\n4. 성별\n5. 주소\n6. 최종학력\n7. 연락처\n8. 희망직종\n9. 희망연봉");
+							System.out.print("1. 암호 \n2. 성명\n3. 나이\n4. 성별\n5. 주소\n6. 최종학력\n7. 연락처\n8. 희망직종\n9. 희망연봉\n =>");
 							String changeInfoNo = sc.nextLine();
 							
 							
