@@ -1,9 +1,5 @@
 package my.day13.sub;
-
 import java.util.Scanner;
-
-import org.omg.Messaging.SyncScopeHelper;
-
 import my.util.MyUtil;
 
 // 180820 12:31PM

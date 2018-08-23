@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 
 public class Company extends Common {
 	
-	
 //	1. Company클래스의 특정 요소 추상화
 	private String ceo;		// 대표자명
 	private long seedmoney;	// 회사 자본금
@@ -19,11 +18,10 @@ public class Company extends Common {
 		this.seedmoney = seedmoney;
 		this.jobtype = jobtype;
 		
-		super.count++;
+		Common.count++;
 	}
 
 //	3. Getter Setter 셋팅
-	
 	public String getCeo() {
 		return ceo;
 	}
@@ -59,7 +57,5 @@ public class Company extends Common {
 					  "▷ 업   종: "+jobtype;
 		return info;
 	}
-	
-	
-	
+
 } // end of class
