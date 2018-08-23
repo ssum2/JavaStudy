@@ -8,10 +8,6 @@ import java.util.Scanner;
 // 구인구직 프로그램 구성하기(1) 구직자 클래스
 
 public class Gujikja extends Common {
-
-	// 객체를 몇개 만들었는지 count (생성된 Gujikja 객체 개수 세기)
-//	static int count; 
-	
 	// 1. Gujija클래스의 속성 정하기(추상화)
 
 //	◎구직자와 회사의 공통 요소 (부모 클래스에 있음)
@@ -33,9 +29,6 @@ public class Gujikja extends Common {
 	
 	// 2. 기본생성자, 파라미터가 있는 생성자 만들기
 	public Gujikja( ) { count++; }	// 부모클래스의 static변수를 끌어옴
-	
-	
-	
 	public Gujikja(String id, String passwd, String name, String address, String tel, 
 					String birthday, int gender, int school, String hopejob, int hopemoney) {
 		super(id, passwd, name, address, tel);
@@ -44,11 +37,8 @@ public class Gujikja extends Common {
 		this.school = school;
 		this.hopejob = hopejob;
 		this.hopemoney = hopemoney;
-		count++;
-		
+		count++;	
 	}
-
-
 
 	// 3. 기능 만들기(메소드) --------------------------------------------
 //	// 3-1. 구직자가 로그인 할 수 있는 기능 --> boolean형으로 리턴
@@ -62,7 +52,6 @@ public class Gujikja extends Common {
 //	
 //	// 180821_09:20AM 강사님이 해주신 부분 ---------------------
 //	// 3-1. 구직자가 로그인 할 수 있는 기능
-//	
 //		public Gujikja login2(String userid, String passwd) {
 //			// 객체타입으로 반환
 //			if(this.userid.equals(userid) &&
@@ -93,7 +82,7 @@ public class Gujikja extends Common {
 		return String.valueOf(currentYear-birthYear+1);
 	}
 	
-	
+
 	public void setGender(int gender) {
 		this.gender = gender;
 	}
@@ -112,16 +101,13 @@ public class Gujikja extends Common {
 	// 3-3. b) 구직자 성별 조회 기능 (강사님이 한것; switch)
 	public String getGender1() {
 		String result = "";
-		
 		switch (gender) {
 		case 1:
 			result = "남자";
 			break;
-
 		case 2:
 			result = "여자";
 			break;
-		
 		}
 		return result;
 	}	
