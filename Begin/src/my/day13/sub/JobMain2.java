@@ -153,7 +153,6 @@ public class JobMain2 {
 		} // end of deleteSomeGujikja()
 
 //	---------------------------------------------------------------------------------		
-
 	public void registerCompany(Scanner sc) {
 		String id = "";
 		boolean boolCompanyId = false;
@@ -194,8 +193,7 @@ public class JobMain2 {
 						break;
 					}
 				} while (true); // end of while(passwd)
-				
-				
+					
 				// 3) 이름 입력 및 유효성검사 (공백제거)
 				String name = "";
 				boolean boolName=false;
@@ -211,9 +209,7 @@ public class JobMain2 {
 					else
 						break;
 				}while (name.trim().isEmpty()); // 참일 때 계속 반복(참 == null)
-		
-		
-
+	
 				// 4) 주소 입력 받기
 				String address = "";
 				do {
@@ -237,7 +233,6 @@ public class JobMain2 {
 				
 				} while (!boolTel); // boolMobile이 참일 때 빠져나간다
 				
-				
 				// 6) 대표명 입력 받기
 				
 				String ceo ="";
@@ -255,8 +250,6 @@ public class JobMain2 {
 				
 				System.out.print("▷자본금 => ");
 				seedmoney = Long.parseLong(sc.nextLine());
-					
-				
 				
 				// 8) 업종 입력 받기
 				String jobtype = "";
@@ -292,8 +285,7 @@ public class JobMain2 {
 				}
 			} // end of registerCompany()
 		
-		
-	
+
 	// 기업 회원 로그인 기능
 	public Company loginCompany(Scanner sc) { 
 		Company company = null; 			
@@ -331,8 +323,7 @@ public class JobMain2 {
 		
 		return company;
 	} // end of loginCompany()
-		
-		
+			
 	
 	// 기업 회원 정보 변경
 		public void updateMeCompany(Scanner sc, Company meCom) {
@@ -375,8 +366,7 @@ public class JobMain2 {
 				}	
 			} // end of for	
 		} // end of updateMeCompany()
-		
-		
+	
 		
 		// 기업 회원 탈퇴
 		public void deleteMeCompany(String id) {
@@ -471,7 +461,7 @@ public class JobMain2 {
 		System.out.print("▷검색하실 구직자ID: ");
 		String userid = sc.nextLine();
 		for(int i=0; i<Common.count; i++) {
-			if(commonArr[i] instanceof Company &&
+			if(commonArr[i] instanceof Gujikja &&
 			   commonArr[i].getId().equals(userid)) {
 				someGujikja = ((Gujikja) commonArr[i]).getGujikjaInfo();
 			break;
@@ -634,7 +624,6 @@ public class JobMain2 {
 		
 		} while (!boolMobile); // boolMobile이 참일 때 빠져나간다
 		
-		
 		// 9) 희망 직종 입력
 		
 		String hopejob ="";
@@ -646,8 +635,6 @@ public class JobMain2 {
 				break;
 			
 		} while (true);
-		
-		
 		
 		// 10) 희망 연봉 --> 숫자로만 받게끔함
 		int hopemoney = 0;
@@ -1001,9 +988,8 @@ public class JobMain2 {
 						case "3": // 3. 모든 구직자 정보 조회
 							for(int i=0; i<Common.count; i++) {
 								if(jobapp.commonArr[i] instanceof Gujikja) {
-								System.out.println(((Gujikja)jobapp.commonArr[i]).getGujikjaInfo());
-													
-								System.out.println("");
+									System.out.println(((Gujikja)jobapp.commonArr[i]).getGujikjaInfo());
+									System.out.println("");
 								}
 							}
 							break;
@@ -1066,8 +1052,10 @@ public class JobMain2 {
 							
 							case "2": // 모든 구직회사 정보 조회
 								for(int i=0; i<Common.count; i++) {
-									System.out.println(((Company)jobapp.commonArr[i]).getCompanyInfo());
-									System.out.println("");
+									if(jobapp.commonArr[i] instanceof Company) {
+										System.out.println(((Company)jobapp.commonArr[i]).getCompanyInfo());
+										System.out.println("");
+									}
 								}
 								break;
 							
