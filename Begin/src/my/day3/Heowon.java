@@ -1,7 +1,5 @@
 package my.day3;
 
-import org.omg.Messaging.SyncScopeHelper;
-
 public class Heowon {
 	//멤버변수
 	String userid;
