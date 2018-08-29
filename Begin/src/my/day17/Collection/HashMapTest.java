@@ -102,15 +102,6 @@ public class HashMapTest {
 		for(String key:keysets) {
 			memberMap.get(key).showInfo();
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 	} // end of main()
 } // end of class

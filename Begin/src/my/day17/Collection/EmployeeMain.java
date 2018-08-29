@@ -94,6 +94,30 @@ public class EmployeeMain implements InterEmployee {
 		}	
 	}
 	
+	public void changePosition3(Map<String, List<Employee>> map, String employeeCode, String changePosition) {
+		Set<String> keysets = map.keySet();
+		boolean flag = false;
+		String realKey = "";
+		
+		for(String key : keysets) {
+			List<Employee> empList=map.get(key);
+			for(Employee emp : empList) {
+				if(emp.getEmployeeCode().equals(employeeCode)) {
+					emp.setPosition(changePosition);
+					realKey = key;
+					flag=true;
+					break;
+				}
+			} // end of inner for
+			if(flag) {
+				System.out.println(">> 직급 변경이 완료 되었습니다! <<");
+				System.out.println(showDeptInfo(map, realKey));
+				break;
+			}
+		} // end of outer for
+	} // end of method
+	
+	
 	@Override
 	public void changeSalary2(Map<String, List<Employee>> map, String changeDeptno, String employeeCode,
 			double percent) {
@@ -118,9 +142,6 @@ public class EmployeeMain implements InterEmployee {
 			System.out.println("\n>> 검색하신 부서번호 "+changeDeptno+"은 존재하지 않습니다");
 	}
 
-	
-	
-	
 	public static void main(String[] args) {
 		/*
 		 	ex) 조회할 부서번호: 10 Enter
@@ -233,7 +254,12 @@ public class EmployeeMain implements InterEmployee {
 		
 		System.out.println("-------------------------------------");
 
+		System.out.print(">> 사원번호: ");
+		String employeeCode = sc.nextLine();
 		
+		System.out.print(">> 변경할 직급: ");
+		changePosition = sc.nextLine();
+		empMain.changePosition3(map, employeeCode, changePosition);
 		
 		
 //		#혼자해보는 것 >> depth를 더 넣어서 부서 > 직원 > 변경
@@ -241,7 +267,7 @@ public class EmployeeMain implements InterEmployee {
 		String changeDeptno1 = sc.nextLine();
 		
 		System.out.print(">> 사원번호: ");
-		String employeeCode = sc.nextLine();
+		employeeCode = sc.nextLine();
 		
 		System.out.print(">> 변경할 직급: ");
 		String changePosition1 = sc.nextLine();
