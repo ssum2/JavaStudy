@@ -43,7 +43,7 @@
 	그렇지 않은 경우 입출금 스레드의 실행순서를 우리가 알수가 없으므로
 	통장계좌에 입금과 출금 처리가 이상하게 기록 될 수 있게 된다.             
 */
-package my.day18.Synchronization;
+package my.day18.Synchronization_WaitNotify;
 
 // #공유데이터 클래스; 공유 통장
 public class SyncBankBook {
@@ -89,16 +89,18 @@ public class SyncBankBook {
 		      }catch(InterruptedException e){}
 	    }// end of while----------------------------------
 
-		
+		System.out.println("==== 입금 업무 시작 ====");
 		balance += money;
-		System.out.println("계좌번호: " + account + "\n > 입금액: " + money + ", 입금 후 잔액: "+balance+"\n");
+		System.out.println("계좌번호: " + account + "\n > 입금액: " + money + ", 입금 후 잔액: "+balance);
 		boolDeposit = false;	// 입금 완료 후 입금기능을 멈추게 하려고 false로 바꿈 > while문 안의 wait 실행
 		boolWithdraw = true;	// 입금 후 출금을 진행하기 위해 true로!
 		notify();				// 대기실(waiting pool)에서 대기하고 있는 스레드 아무거나 하나 골라서 깨움 
-								// -> 깨운 스레드를 runnable상태로 전환
+		System.out.println("==== 입금 업무 완료 ====\n");				// -> 깨운 스레드를 runnable상태로 전환
 	}
 	
 //	#동기화 처리한 출금 메소드
+//	1. synchronized로 스레드 1개의 태스크를 모두 수행한 다음 다른 스레드로 넘어가게 함
+//	2. flag를 세워주고 wait - notify로 메소드스레드간의 순서를 정해줌
 	public synchronized void withdraw(long money) {
 		while(boolWithdraw==false) 
 	    { // boolWithdraw 의 값이 true 이어야만 출금메소드 withdraw(long money)이 정상작동 하도록 한다.
@@ -113,19 +115,22 @@ public class SyncBankBook {
 		
 //		> boolWithdraw == true;
 		if(balance - money < 0) {	//잔고-출금액이 0원 미만일 때 출금이 되지 않도록 함
-			System.out.println("계좌번호: " + account + "\n > 잔액부족!, 현재 금액: "+balance+", 출금요청금액 :"+money+"\n");
+			System.out.println("==== 출금 업무 시작 ====");
+			System.out.println("계좌번호: " + account + "\n > 잔액부족!, 현재 금액: "+balance+", 출금요청금액 :"+money);
 			
 			boolWithdraw = false;	// 출금block
 			boolDeposit = true;		// 입금OK
 			notify();				// waiting pool에 있는 불특정 입금스레드 하나를 깨움
+			System.out.println("==== 출금 업무 완료 ====\n");
 			return;		// 프로그램 종료
 		}
+		System.out.println("==== 출금 업무 시작 ====");
 		balance -=money; // if에서 return을 걸었기 때문에 여기로 떨어지는 경우는 잔고가 있을 경우임 >> 잔고에서 출금!
-		System.out.println("계좌번호: " + account + "\n > 출금액: " + money + ", 출금 후 잔액: "+balance+"\n");
+		System.out.println("계좌번호: " + account + "\n > 출금액: " + money + ", 출금 후 잔액: "+balance);
 		boolWithdraw = false;
 		boolDeposit = true;
 		notify();
-		
+		System.out.println("==== 출금 업무 완료 ====\n");
 	}
 	
 

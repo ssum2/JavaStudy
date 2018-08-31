@@ -1,4 +1,4 @@
-package my.day18.Synchronization;
+package my.day18.Synchronization_WaitNotify;
 
 public class SyncBankBookMain {
 
@@ -57,7 +57,7 @@ public class SyncBankBookMain {
 			
 		
 		}
-
+		System.out.println(">> main 스레드 종료 <<");
 		
 		
 		

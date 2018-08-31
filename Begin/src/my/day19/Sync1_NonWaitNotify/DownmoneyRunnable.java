@@ -1,4 +1,4 @@
-package my.day18.Synchronization;
+package my.day19.Sync1_NonWaitNotify;
 
 // #출금할 스레드 객체
 public class DownmoneyRunnable implements Runnable {

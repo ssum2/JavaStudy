@@ -1,4 +1,4 @@
-package my.day18.Synchronization;
+package my.day18.Synchronization_WaitNotify;
 
 // #입금할 스레드 객체
 public class UpmoneyRunnable implements Runnable {
